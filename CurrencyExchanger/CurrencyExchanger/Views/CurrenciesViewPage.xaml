@@ -1,0 +1,52 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:local="clr-namespace:CurrencyExchanger.ViewModels"
+             x:Class="CurrencyExchanger.Views.CurrenciesViewPage">
+    <NavigationPage.TitleView>
+        <StackLayout Orientation="Horizontal">
+            <Label Text="Exchange rates" HorizontalOptions="CenterAndExpand" VerticalOptions="Center"/>
+            <Button x:Name="SettingsButton" Text="Settings" Command="{Binding OpenSettingsCommand}"/>
+        </StackLayout>
+
+    </NavigationPage.TitleView>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="15"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="2*"/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <Label Text="{Binding DatePrimary}" Grid.Column="1" HorizontalTextAlignment="Center"/>
+        <Label Text="{Binding DateSecondary}" Grid.Column="2" HorizontalTextAlignment="Center"/>
+        <ScrollView Grid.Row="1" Grid.ColumnSpan="3">
+            <ListView ItemsSource="{Binding Currencies, Mode=TwoWay}">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <Grid Grid.ColumnSpan="3">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="2*"/>
+                                    <ColumnDefinition/>
+                                    <ColumnDefinition/>
+                                </Grid.ColumnDefinitions>
+                                <StackLayout Grid.Column="0" Orientation="Vertical">
+                                    <Label Text="{Binding Code}" FontSize="20" VerticalTextAlignment="Center"/>
+                                    <StackLayout Orientation="Horizontal">
+                                        <Label Text="{Binding Quantity}" FontSize="13"/>
+                                        <Label Text="{Binding Name}" FontSize="13"/>
+                                    </StackLayout>
+                                </StackLayout>
+                                <Label Grid.Column="1" Text="{Binding RateToday}" VerticalTextAlignment="Center" HorizontalTextAlignment="Center"/>
+                                <Label Grid.Column="2" Text="{Binding RateSecondary}" VerticalTextAlignment="Center" HorizontalTextAlignment="Center"/>
+                            </Grid>
+
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </ScrollView>
+    </Grid>
+</ContentPage>
